@@ -48,13 +48,20 @@ func main() {
           }
           fmt.Println(ls)
 
+        case line == "pwd":
+          pwd, err := os.Getwd()
+          if err != nil {
+            fmt.Println("huh? it broke... idk check ur code")
+          }
+          fmt.Println(pwd)
+
+
+        default:
+          fmt.Println("eror")
+          return
+
         case line == "":
           continue
-        
-
-          default:
-            fmt.Println("eror")
-            return
         }
 
     // Check if the loop stopped because of an error instead of EOF
