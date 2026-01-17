@@ -4,7 +4,7 @@ import (
     "bufio"
 //    "bytes"
     "fmt"
-    "log"
+ //   "log"
     "os"
 //    "os/exec"
     "strings"
@@ -34,17 +34,32 @@ func main() {
     for scanner.Scan() {
         line := scanner.Text()
 
-        // skip empty lines
-        if strings.TrimSpace(line) == "" {
-            continue
-        }
+        switch {
+          
+        case strings.HasPrefix(line, "cd"):
+          path := strings.TrimSpace(strings.TrimPrefix(line, "cd"))
+          os.Chdir(path)
 
+
+        case line == "ls":
+          ls, err := os.ReadDir(".")
+          if err != nil {
+            fmt.Println("I also have no idea why ls didn't work - G0o53") 
+          }
+          fmt.Println(ls)
+
+        case line == "":
+          continue
         
-    }
+
+          default:
+            fmt.Println("eror")
+            return
+        }
 
     // Check if the loop stopped because of an error instead of EOF
     if err := scanner.Err(); err != nil {
-        log.Fatal(err)
+        fmt.Println("err;")
     }
+  }
 }
-

@@ -1,6 +1,4 @@
-echo Hello World!
+cd ../../fountain
 
-set x
+ls
 
-ls ~
-ls /
