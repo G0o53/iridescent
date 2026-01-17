@@ -55,14 +55,26 @@ func main() {
           }
           fmt.Println(pwd)
 
+        case strings.HasPrefix(line, "mkdir"):
+          path := strings.TrimSpace(strings.TrimPrefix(line, "mkdir"))
 
+          fmt.Printf("mkdir path = '%s'\n", path)
+
+          err := os.Mkdir(path, 0755)
+          if err != nil {
+            fmt.Println("mkdir decided to break. D: ", err)
+          }
+
+
+        case line == "":
+          continue
+          
         default:
           fmt.Println("eror")
           return
 
-        case line == "":
-          continue
         }
+
 
     // Check if the loop stopped because of an error instead of EOF
     if err := scanner.Err(); err != nil {
